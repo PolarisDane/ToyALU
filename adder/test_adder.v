@@ -17,24 +17,24 @@
 `include "adder.v"
 
 module test_adder;
-	wire [15:0] answer;
+	wire [31:0] answer;
 	wire 		carry;
-	reg  [15:0] a, b;
-	reg	 [16:0] res;
+	reg  [31:0] a, b;
+	reg	 [132:0] res;
 
 	adder adder (a, b, answer, carry);
 	
 	integer i;
 	initial begin
 		for(i=1; i<=100; i=i+1) begin
-			a[15:0] = $random;
-			b[15:0] = $random;
+			a[31:0] = $random;
+			b[31:0] = $random;
 			res		= a + b;
 			
 			#1;
 			$display("TESTCASE %d: %d + %d = %d carry: %d", i, a, b, answer, carry);
 
-			if (answer !== res[15:0] || carry != res[16]) begin
+			if (answer !== res[31:0] || carry != res[32]) begin
 				$display("Wrong Answer!");
 			end
 		end
